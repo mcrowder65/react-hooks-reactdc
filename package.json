@@ -1,0 +1,36 @@
+{
+  "name": "react-hooks-novajs",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "3.9.2",
+    "faker": "4.1.0",
+    "lodash.compose": "2.4.1",
+    "lodash.isequal": "4.5.0",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "react-router": "4.3.1",
+    "react-router-dom": "4.3.1",
+    "react-scripts": "2.1.5",
+    "use-local-storage-set-state": "1.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "mcrowder65"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "eslint-config-mcrowder65": "0.0.38",
+    "prettier": "1.16.4"
+  }
+}
