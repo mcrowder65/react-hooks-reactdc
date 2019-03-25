@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Router as BrowserRouter } from "react-router-dom";
 import { Route } from "react-router";
 import { createBrowserHistory } from "history";
+import { Grid } from "@material-ui/core";
 import OneHoc from "./one-hoc";
 import { SnackbarProvider } from "./snackbar";
 import OneRenderProps from "./one-renderprops";
@@ -20,8 +21,34 @@ import BasicHook from "./basic-hook";
 
 const browserHistory = createBrowserHistory();
 
-function withNextRoute(Comp) {
-  return Comp
+function withNextRoute(Comp, next, prev) {
+  function Wrapper(props) {
+    return (
+      <Grid
+        container
+        direction="column"
+        justify="space-between"
+        style={{ height: "95vh" }}
+      >
+        <Grid item>
+          <Comp {...props} />
+        </Grid>
+        <Grid container>
+          <Grid item>
+            <button onClick={() => browserHistory.push(next)}>Next</button>
+          </Grid>
+          <Grid item>
+            {prev && (
+              <button onClick={() => browserHistory.push(prev)}>
+                Previous
+              </button>
+            )}
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  }
+  return Wrapper;
 }
 class App extends Component {
   render() {
@@ -30,10 +57,39 @@ class App extends Component {
         <LoadingProvider>
           <BrowserRouter history={browserHistory}>
             <div>
-              <Route exact path="/one-hoc" component={withNextRoute(OneHoc)} />
-              <Route path="/one-renderprops" component={OneRenderProps} />
-              <Route path="/two-hoc" component={TwoHoc} />
-              <Route path="/two-renderprops" component={TwoRenderProps} />
+              <Route
+                exact
+                path="/one-hoc"
+                component={withNextRoute(OneHoc, "/one-renderprops")}
+              />
+              <Route
+                path="/one-renderprops"
+                component={withNextRoute(
+                  OneRenderProps,
+                  "/two-hoc",
+                  "/one-hoc",
+                )}
+              />
+              <Route
+                path="/two-hoc"
+                component={withNextRoute(
+                  TwoHoc,
+                  "/two-renderprops",
+                  "/one-renderprops",
+                )}
+              />
+              <Route
+                path="/two-renderprops"
+                component={withNextRoute(
+                  TwoRenderProps,
+                  "/basic-hook",
+                  "/two-renderprops",
+                )}
+              />
+              <Route
+                path="/basic-hook"
+                component={withNextRoute(BasicHook, "/", "/two-renderprops")}
+              />
               <Route path="/need-use-reducer" component={NeedUseReducer} />
               <Route path="/use-reducer" component={UseReducer} />
               <Route path="/use-effect-class" component={UseEffectClass} />
@@ -42,7 +98,6 @@ class App extends Component {
               <Route path="/key-listener-hook" component={KeyListenerHook} />
               <Route path="/use-callback" component={UseCallback} />
               <Route path="/use-memo" component={UseMemo} />
-              <Route path="/basic-hook" component={BasicHook} />
             </div>
           </BrowserRouter>
         </LoadingProvider>
