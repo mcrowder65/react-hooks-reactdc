@@ -11,8 +11,6 @@ import TwoHoc from "./two-hoc";
 import TwoRenderProps from "./two-renderprops";
 import UseReducer from "./use-reducer";
 import NeedUseReducer from "./need-use-reducer";
-import UseEffectClass from "./use-effect-class";
-import UseEffect from "./use-effect";
 import KeyListenerClass from "./key-listener-class";
 import KeyListenerHook from "./key-listener-hook";
 import UseCallback from "./use-callback";
@@ -83,21 +81,58 @@ class App extends Component {
                 component={withNextRoute(
                   TwoRenderProps,
                   "/basic-hook",
-                  "/two-renderprops",
+                  "/two-hoc",
                 )}
               />
               <Route
                 path="/basic-hook"
-                component={withNextRoute(BasicHook, "/", "/two-renderprops")}
+                component={withNextRoute(
+                  BasicHook,
+                  "/need-use-reducer",
+                  "/two-renderprops",
+                )}
               />
-              <Route path="/need-use-reducer" component={NeedUseReducer} />
-              <Route path="/use-reducer" component={UseReducer} />
-              <Route path="/use-effect-class" component={UseEffectClass} />
-              <Route path="/use-effect" component={UseEffect} />
-              <Route path="/key-listener-class" component={KeyListenerClass} />
-              <Route path="/key-listener-hook" component={KeyListenerHook} />
+              <Route
+                path="/need-use-reducer"
+                component={withNextRoute(
+                  NeedUseReducer,
+                  "/use-reducer",
+                  "/basic-hook",
+                )}
+              />
+              <Route
+                path="/use-reducer"
+                component={withNextRoute(
+                  UseReducer,
+                  "/key-listener-class",
+                  "/need-use-reducer",
+                )}
+              />
+              <Route
+                path="/key-listener-class"
+                component={withNextRoute(
+                  KeyListenerClass,
+                  "/key-listener-hook",
+                  "/use-reducer",
+                )}
+              />
+              <Route
+                path="/key-listener-hook"
+                component={withNextRoute(
+                  KeyListenerHook,
+                  "/use-memo",
+                  "/key-listener-class",
+                )}
+              />
               <Route path="/use-callback" component={UseCallback} />
-              <Route path="/use-memo" component={UseMemo} />
+              <Route
+                path="/use-memo"
+                component={withNextRoute(
+                  UseMemo,
+                  "/use-memo",
+                  "/key-listener-hook",
+                )}
+              />
             </div>
           </BrowserRouter>
         </LoadingProvider>
