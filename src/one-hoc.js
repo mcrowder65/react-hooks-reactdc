@@ -9,7 +9,7 @@ function OneHoc(props) {
       variant="contained"
       color="primary"
       onClick={() => {
-        props.addMessage("I am a snackbar!");
+        props.addMessage("I am not a snackbar!");
       }}
     >
       Add Snackbar

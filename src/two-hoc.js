@@ -43,6 +43,7 @@ TwoHoc.propTypes = {
   makeApiCall: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
+
 const enhance = compose(
   withLocalLoader,
   withGlobalLoader,
