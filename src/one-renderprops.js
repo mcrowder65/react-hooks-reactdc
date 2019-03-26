@@ -1,25 +1,16 @@
 import React from "react";
-import { Button } from "@material-ui/core";
-import { WithSnackbar } from "./snackbar";
+import PropTypes from "prop-types";
 
+class WithMessage extends React.Component {
+  render() {
+    return this.props.children;
+  }
+}
+WithMessage.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+};
 function OneRenderProps() {
-  return (
-    <WithSnackbar>
-      {({ addMessage }) => {
-        return (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              addMessage("I am a snackbar!");
-            }}
-          >
-            Add Snackbar
-          </Button>
-        );
-      }}
-    </WithSnackbar>
-  );
+  return <WithMessage>hello!</WithMessage>;
 }
 
 export default OneRenderProps;
