@@ -1,23 +1,39 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Button } from "@material-ui/core";
-import { withSnackbar } from "./snackbar";
 
+function withMessage(Comp) {
+  return class extends React.Component {
+    componentDidMount() {
+      // do network request log
+    }
+    render() {
+      return (
+        <Comp
+          {...this.props}
+          logMessage={(message) => {
+            console.log("your message ", message);
+          }}
+        />
+      );
+    }
+  };
+}
 function OneHoc(props) {
   return (
     <Button
       variant="contained"
       color="primary"
       onClick={() => {
-        props.addMessage("I am a snackbar!");
+        props.logMessage("I am a message!");
       }}
     >
-      Add Snackbar
+      Log message
     </Button>
   );
 }
 
 OneHoc.propTypes = {
-  addMessage: PropTypes.func.isRequired,
+  logMessage: PropTypes.func.isRequired,
 };
-export default withSnackbar(OneHoc);
+export default withMessage(OneHoc);
