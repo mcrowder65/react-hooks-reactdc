@@ -13,8 +13,8 @@ function FilterNames() {
     return filter ? list.filter((name) => name.indexOf(filter) !== -1) : list;
   };
   const [filter, setFilter] = React.useState("");
-  // const names = React.useMemo(() => filterNames(filter), [filter]);
-  const names = filterNames(filter);
+  const names = React.useMemo(() => filterNames(filter), [filter]);
+  // const names = filterNames(filter);
   console.log("render");
   return (
     <div>

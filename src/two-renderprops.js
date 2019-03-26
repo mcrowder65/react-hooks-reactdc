@@ -3,7 +3,7 @@ import { Button } from "@material-ui/core";
 import { sleep } from "./utils";
 import { WithGlobalLoader, WithLocalLoader } from "./loading";
 
-function TwoHoc() {
+function TwoRenderProps() {
   return (
     <WithGlobalLoader>
       {(global) => {
@@ -48,4 +48,4 @@ function TwoHoc() {
   );
 }
 
-export default TwoHoc;
+export default TwoRenderProps;

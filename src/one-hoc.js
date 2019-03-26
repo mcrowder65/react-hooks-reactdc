@@ -12,7 +12,7 @@ function withMessage(Comp) {
         <Comp
           {...this.props}
           logMessage={(message) => {
-            console.log("your message ", message);
+            console.log("our message ", message);
           }}
         />
       );
