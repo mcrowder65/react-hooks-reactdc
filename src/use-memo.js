@@ -1,7 +1,7 @@
 import React from "react";
 import faker from "faker";
 
-const list = Array(100000)
+const list = Array(1000)
   .fill()
   .map(() => {
     return faker.name.findName();
@@ -13,14 +13,16 @@ function FilterNames() {
     return filter ? list.filter((name) => name.indexOf(filter) !== -1) : list;
   };
   const [filter, setFilter] = React.useState("");
-  const names = React.useMemo(() => filterNames(filter), [filter]);
-  // const names = filterNames(filter);
+  // const names = React.useMemo(() => filterNames(filter), [filter]);
+  const names = filterNames(filter);
+  console.log("render");
   return (
     <div>
       <div>
         <button onClick={() => setCount(count + 1)}>Force a rerender</button>
       </div>
-      Names <input value={filter} onChange={(e) => setFilter(e.target.value)} />
+      Names {names.length}{" "}
+      <input value={filter} onChange={(e) => setFilter(e.target.value)} />
       {names.map((name, index) => (
         <div key={index}>{name}</div>
       ))}
